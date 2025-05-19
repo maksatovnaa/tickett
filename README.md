@@ -1,3 +1,5 @@
+https://maksatovnaa.github.io/tickett/
+
 # Frontend Mentor - Conference ticket generator
 
 ![Design preview for the Conference ticket generator coding challenge](./preview.jpg)
