@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Conference ticket generator</title>
+
+  <style>
+    body {
+      text-align: center;
+      background-image: url(background-desktop.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .input-wide {
+      width: 350px;
+      max-width: 90%;
+      height: 40px;
+      border-radius: 10px;
+      border: none;
+      padding: 0 15px;
+      font-size: 16px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .avatar input[type="file"] {
+      height: 60px;
+      border-radius: 10px;
+      border: 2px dashed #ccc;
+      background-color: #f9f9f9;
+      color: #19092B;
+      padding: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button {
+      width: 350px;
+      max-width: 90%;
+      height: 45px;
+      background-color: #F67464;
+      color: #19092B;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    @media screen and (max-width: 450px) {
+      .input-wide,
+      button {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="maintext">
+    <p style="font-size: 20px;"><strong>Coding Conf</strong></p>
+    <h1 style="font-size: 45px;">Your Journey to Coding Conf <br> 2025 Starts Here!</h1>
+    <p style="font-size: 20px; margin-top: -10px;">Secure your spot at next year's biggest coding conference.</p>
+
+    <div class="container">
+      <div id="form-section" class="container">
+
+        <div class="avatar" style="margin-bottom: 30px;">
+          <p style="margin-bottom: 32px; font-size: 18px; font-weight: 600; width: 410px;">Upload Avatar</p>
+          <input id="avatarInput" type="file" accept="image/*" class="input-wide" style=" width: 350px">
+        </div>
+
+        <div class="name">
+          <p style="margin-right: 265px; margin-top: -30px; ">Full Name</p>
+          <input id="fullName" type="text" placeholder="@yourname" class="input-wide" style=" width: 370px"> 
+        </div>
+
+        <div class="email">
+          <p style="margin-right: 250px;">Email Address</p>
+          <input id="email" type="email" placeholder="example@email.com" class="input-wide" style=" width: 370px"> 
+        </div>
+
+        <div class="github">
+          <p style="margin-right: 220px;">GitHub Username</p>
+          <input id="github" type="text" placeholder="@yourusername" class="input-wide" style=" width: 370px"> 
+        </div>
+
+        <button onclick="generateTicket()" style="width: 435px;">Generate My Ticket</button>
+      </div>
+
+      <div id="ticket-section" style="display: none; margin-top: 50px;">
+        <h2>Congrats, <span id="nameDisplay"></span>!<br>Your ticket is ready.</h2>
+        <p>We've emailed your ticket to <span id="emailDisplay"></span> and will send updates in the run up to the event.</p>
+
+        <div style="background-color: #09132f; padding: 20px; border-radius: 20px; display: inline-block; width: 500px; height: 150px;">
+          <p><strong>Coding Conf</strong><br>Jan 31, 2025 / Austin, TX</p>
+          <img id="avatarPreview" src="" alt="Avatar" style="width: 80px; border-radius: 10px;"><br>
+          <strong id="nameTicket"></strong><br>
+          <span id="githubDisplay"></span>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+  <script>
+    function generateTicket() {
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const github = document.getElementById('github').value;
+      const avatarInput = document.getElementById('avatarInput');
+
+      document.getElementById('nameDisplay').textContent = name;
+      document.getElementById('emailDisplay').textContent = email;
+      document.getElementById('nameTicket').textContent = name;
+      document.getElementById('githubDisplay').textContent = github;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('avatarPreview').src = e.target.result;
+      }
+      if (avatarInput.files[0]) {
+        reader.readAsDataURL(avatarInput.files[0]);
+      }
+
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('ticket-section').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
